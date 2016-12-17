@@ -1,16 +1,20 @@
+// twitter keys from keys.js
 var keys = require('./keys.js');
-
-var twitter = require('twitter');
-
-var spotify = require('spotify');
-
-var omdb = require('omdb');
-
+// inquirer npm package
 var inquirer = require('inquirer');
+// file system built into nodejs to read random.txt
+var fs = require('fs');
+// twitter npm/api
+var twitter = require('twitter');
+// spotify npm/api
+var spotify = require('spotify');
+// omdb npm/api
+var omdb = require('omdb');
 
 var http = require('http');
 
 var doWhatItSays = process.argv[2];
+
 
 // Create prompt with list for the command choices
 
@@ -86,7 +90,8 @@ inquirer.prompt([
 			{	
 				type: 'input',
 				message: 'You chose movie-this. Now name a movie.',
-				name: 'movie'
+				name: 'movie',
+				default: 'Mr. Nobody'
 			}
 
 		]).then(function (user){
@@ -95,22 +100,39 @@ inquirer.prompt([
 				if (err) {
 					throw err;
 				} else {
-				console.log(JSON.stringify(movie, null, 2));	
-				console.log('Movie: ' + movie);
+				var title = movie.title;
+				var year = movie.year;
+				var omdbRating = movie.rated;
+				var country = movie.countries;
+				var plot = movie.plot;
+				var actors = movie.actors;
+				var rottenRating = movie.tomato.rating;
+				var rottenURL = movie.tomato.url;
+				console.log('Movie Title: ' + title + '\n' + '________________' + '\n' + 'Movie Produced Year: ' + year + '\n' + '________________' + '\n' + 'Rating: ' + omdbRating + '\n' + '________________' + '\n' + 'Produced in: ' + country + '\n' + '________________' + '\n' + 'Plot: ' + plot + '\n' + '________________' + '\n' + 'Actors: ' + actors + '\n' + '________________' + '\n' + 'Rotten Tomatoes Rating: ' + rottenRating + '\n' + '________________' + '\n' + 'Rotten Tomatoes URL: ' + rottenURL);	
 				}
 			});
 			
 		});
 	} else if (user.commands === 'do-what-it-says') {
 		console.log('Ok ' + user.commands);
-
-		var fs = require(fs);
-		fs.readFile('random.txt', 'utf8', function(err, data){
-			var result = data.split(',').forEach(function (item){
-				console.log(item);
-			});
-		});
+		var output;
 		
+		fs.readFile('random.txt', 'utf8', function(err, data){
+			output = data.split(",");
+
+			spotify.search({ type: 'track', query: output[1] }, function(err, data){
+				if (err) {
+					throw err;
+				} else {	
+				var artistsName = data.tracks.items[0].artists[0].name;
+				var songName = data.tracks.items[0].name;
+				var songPreview = data.tracks.items[0].preview_url;
+				var albumName = data.tracks.items[0].album.name;
+
+				console.log('Artist(s): ' + artistsName + '\n' + 'Song: ' + songName + '\n' + 'Preview: ' + songPreview + '\n' + 'Album');
+				}
+			});	
+		});
 	}
 });
 
