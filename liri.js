@@ -63,9 +63,18 @@ inquirer.prompt([
 				if (err) {
 					throw err;
 				} else {	
-				var artistsObject = data.tracks.items[0].album.artists;
-				console.log(artistsObject.name);
-				console.log(JSON.stringify(data.tracks.items[0].artists[0].name, null, 2));
+				var artistsName = data.tracks.items[0].artists[0].name;
+				var songName = data.tracks.items[0].name;
+				var songPreview = data.tracks.items[0].preview_url;
+				var albumName = data.tracks.items[0].album.name;
+				console.log('Artist(s): ' + artistsName);
+				console.log('Song: ' + songName);
+				console.log('Preview: ' + songPreview);
+				console.log('Album: ' + albumName);
+				// console.log(JSON.stringify(data.tracks.items[0].artists[0].name, null, 2));
+				// console.log(JSON.stringify(data.tracks.items[0].name, null, 2));
+				// console.log(JSON.stringify(data.tracks.items[0].preview_url, null, 2));
+				// console.log(JSON.stringify(data.tracks.items[0].album.name, null, 2));
 				}
 			});	
 		});
