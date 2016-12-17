@@ -11,10 +11,6 @@ var spotify = require('spotify');
 // omdb npm/api
 var omdb = require('omdb');
 
-var http = require('http');
-
-var doWhatItSays = process.argv[2];
-
 
 // Create prompt with list for the command choices
 
@@ -55,7 +51,7 @@ inquirer.prompt([
 		});
 		
 	} else if (user.commands === 'spotify-this-song') {
-		console.log('Ok ' + user.commands);
+		
 		inquirer.prompt([
 			{
 				type: 'input',
@@ -75,16 +71,14 @@ inquirer.prompt([
 				var songPreview = data.tracks.items[0].preview_url;
 				var albumName = data.tracks.items[0].album.name;
 
-				console.log('Artist(s): ' + artistsName + '\n' + 'Song: ' + songName + '\n' + 'Preview: ' + songPreview + '\n' + 'Album');
-				console.log('Song: ' + songName);
-				console.log('Preview: ' + songPreview);
-				console.log('Album: ' + albumName);
+				console.log('Artist(s): ' + artistsName + '\n' + '________________' + '\n' + 'Song: ' + songName + '\n' + '________________' + '\n' + 'Preview: ' + songPreview + '\n' + '________________' + '\n' + 'Album: ' + albumName);
+			
 				}
 			});	
 		});
 		
 	} else if (user.commands === 'movie-this') {
-		console.log('Ok ' + user.commands);
+		
 		inquirer.prompt([
 
 			{	
@@ -95,11 +89,11 @@ inquirer.prompt([
 			}
 
 		]).then(function (user){
-			console.log('You chose ' + user.movie);
+			console.log('You chose ' + user.movie + '\n' + '________________');
 			omdb.get({title: user.movie, type: 'movie'}, {tomatoes: true}, function(err, movie){
 				if (err) {
-					throw err;
-				} else {
+					console.log('Maybe you mispelled the title. Try again!');
+				} else if (true){
 				var title = movie.title;
 				var year = movie.year;
 				var omdbRating = movie.rated;
@@ -109,12 +103,14 @@ inquirer.prompt([
 				var rottenRating = movie.tomato.rating;
 				var rottenURL = movie.tomato.url;
 				console.log('Movie Title: ' + title + '\n' + '________________' + '\n' + 'Movie Produced Year: ' + year + '\n' + '________________' + '\n' + 'Rating: ' + omdbRating + '\n' + '________________' + '\n' + 'Produced in: ' + country + '\n' + '________________' + '\n' + 'Plot: ' + plot + '\n' + '________________' + '\n' + 'Actors: ' + actors + '\n' + '________________' + '\n' + 'Rotten Tomatoes Rating: ' + rottenRating + '\n' + '________________' + '\n' + 'Rotten Tomatoes URL: ' + rottenURL);	
+				} else if (movie === 'undefined'){
+					console.log('Maybe you mispelled the title. Try again!');
 				}
 			});
 			
 		});
 	} else if (user.commands === 'do-what-it-says') {
-		console.log('Ok ' + user.commands);
+		console.log('Ok ' + user.commands + '\n' + '________________');
 		var output;
 		
 		fs.readFile('random.txt', 'utf8', function(err, data){
