@@ -4,6 +4,8 @@ var twitter = require('twitter');
 
 var spotify = require('spotify');
 
+var omdb = require('omdb');
+
 var inquirer = require('inquirer');
 
 var http = require('http');
@@ -68,14 +70,11 @@ inquirer.prompt([
 				var songName = data.tracks.items[0].name;
 				var songPreview = data.tracks.items[0].preview_url;
 				var albumName = data.tracks.items[0].album.name;
-				console.log('Artist(s): ' + artistsName);
+
+				console.log('Artist(s): ' + artistsName + '\n' + 'Song: ' + songName + '\n' + 'Preview: ' + songPreview + '\n' + 'Album');
 				console.log('Song: ' + songName);
 				console.log('Preview: ' + songPreview);
 				console.log('Album: ' + albumName);
-				// console.log(JSON.stringify(data.tracks.items[0].artists[0].name, null, 2));
-				// console.log(JSON.stringify(data.tracks.items[0].name, null, 2));
-				// console.log(JSON.stringify(data.tracks.items[0].preview_url, null, 2));
-				// console.log(JSON.stringify(data.tracks.items[0].album.name, null, 2));
 				}
 			});	
 		});
@@ -92,6 +91,15 @@ inquirer.prompt([
 
 		]).then(function (user){
 			console.log('You chose ' + user.movie);
+			omdb.get({title: user.movie, type: 'movie'}, {tomatoes: true}, function(err, movie){
+				if (err) {
+					throw err;
+				} else {
+				console.log(JSON.stringify(movie, null, 2));	
+				console.log('Movie: ' + movie);
+				}
+			});
+			
 		});
 	} else if (user.commands === 'do-what-it-says') {
 		console.log('Ok ' + user.commands);
