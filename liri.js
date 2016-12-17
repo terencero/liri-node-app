@@ -2,6 +2,8 @@ var keys = require('./keys.js');
 
 var twitter = require('twitter');
 
+var spotify = require('spotify');
+
 var inquirer = require('inquirer');
 
 var http = require('http');
@@ -17,7 +19,6 @@ var client = new twitter ({
 	access_token_secret: keys.twitterKeys.access_token_secret
 });
 
-// var params = {sreen_name: 'nodejs'};
 
 inquirer.prompt([
 
@@ -32,9 +33,10 @@ inquirer.prompt([
 	if(user.commands === 'my-tweets') {
 		console.log('Ok ' + user.commands);
 		client.get('statuses/user_timeline', {count: 20, screen_name: '@tro1109'}, function(error, tweets, response){
-			if(error) throw error;
-			// console.log(tweets);
-			// console.log(response);
+			if (error) {
+				throw error;
+			} else {
+
 			var tweetsResults = [];
 			for (var i = 0; i < tweets.length; i++) {
 
@@ -43,6 +45,7 @@ inquirer.prompt([
 
 			}
 			console.log(JSON.stringify(tweetsResults, null, 2));
+			}
 		});
 		
 	} else if (user.commands === 'spotify-this-song') {
@@ -56,6 +59,15 @@ inquirer.prompt([
 		
 		]).then(function (user){
 			console.log('You chose ' + user.song);
+			spotify.search({ type: 'track', query: user.song }, function(err, data){
+				if (err) {
+					throw err;
+				} else {	
+				var artistsObject = data.tracks.items[0].album.artists;
+				console.log(artistsObject.name);
+				console.log(JSON.stringify(data.tracks.items[0].artists[0].name, null, 2));
+				}
+			});	
 		});
 		
 	} else if (user.commands === 'movie-this') {
