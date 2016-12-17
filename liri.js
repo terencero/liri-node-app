@@ -54,7 +54,8 @@ inquirer.prompt([
 			{
 				type: 'input',
 				message: 'You chose spotify. Now name a song.',
-				name: 'song'
+				name: 'song',
+				default: 'The Sign Ace of Base'
 			}
 		
 		]).then(function (user){
