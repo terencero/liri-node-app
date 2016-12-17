@@ -1,0 +1,43 @@
+
+
+---------------------------tweets log---------------------------
+
+Working on homework and I need to tweet something! --created on-- Fri Dec 16 15:07:20 +0000 2016,_________________________________________________________,First tweets on twitter --created on-- Thu Dec 15 19:26:07 +0000 2016,_________________________________________________________,Working on home at the cafe --created on-- Thu Dec 15 19:25:50 +0000 2016,_________________________________________________________
+
+---------------------------song log---------------------------
+
+Artist(s): Adele
+________________
+Song: Rolling in the Deep
+________________
+Preview: https://p.scdn.co/mp3-preview/8c174ce25d94b502dfe31f0da8a070a32fb263db?cid=null
+________________
+Album: 21
+
+---------------------------movie log---------------------------
+
+Movie Title: Star Wars: Episode IV - A New Hope
+________________
+Movie Produced Year: 1977
+________________
+Rating: PG
+________________
+Produced in: USA
+________________
+Plot: Luke Skywalker joins forces with a Jedi Knight, a cocky pilot, a wookiee and two droids to save the galaxy from the Empire's world-destroying battle-station, while also attempting to rescue Princess Leia from the evil Darth Vader.
+________________
+Actors: Mark Hamill,Harrison Ford,Carrie Fisher,Peter Cushing
+________________
+Rotten Tomatoes Rating: 8.6
+________________
+Rotten Tomatoes URL: http://www.rottentomatoes.com/m/star_wars/
+
+---------------------------do-what-it-says log---------------------------
+
+Artist(s): Backstreet Boys
+________________
+Song: I Want It That Way
+________________
+Preview: https://p.scdn.co/mp3-preview/e72a05dc3f69c891e3390c3ceaa77fad02f6b5f6?cid=null
+________________
+Album: The Hits--Chapter One
